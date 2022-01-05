@@ -5,31 +5,38 @@ def jsonParse(def json) {
 pipeline {
     agent any
     stages {
-        stage("paso 1"){
+        stage("Paso 1: Download and checkout"){
             steps {
-                script {
-                sh "echo 'Hello, World Usach 2021!'"
-                }
+               checkout(
+                        [$class: 'GitSCM',
+                        branches: [[name: "jenkins" ]],
+                        userRemoteConfigs: [[url: 'https://github.com/tundervirld/clase2mod3seccion3']]])
             }
         }
-        stage("paso 2"){
+        stage("Paso 2: Compliar"){
             steps {
                 script {
                 sh "echo 'Compile Code!'"
+                // Run Maven on a Unix agent.
+                sh "mvn clean compile -e"
                 }
             }
         }
-        stage("paso 3"){
+        stage("Paso 3: Testear"){
             steps {
                 script {
                 sh "echo 'Test Code!'"
+                // Run Maven on a Unix agent.
+                sh "mvn clean test -e"
                 }
             }
         }
-        stage("paso 4"){
+        stage("Paso 4: Build .Jar"){
             steps {
                 script {
                 sh "echo 'Build .Jar!'"
+                // Run Maven on a Unix agent.
+                sh "mvn clean package -e"
                 }
             }
         }
