@@ -10,7 +10,7 @@ pipeline {
                checkout(
                         [$class: 'GitSCM',
                         branches: [[name: "jenkins" ]],
-                        userRemoteConfigs: [[url: 'https://github.com/tundervirld/clase2mod3seccion3']]])
+                        userRemoteConfigs: [[url: 'https://github.com/adroignacio/ejemplo-maven.git']]])
             }
         }
         stage("Paso 2: Compliar"){
