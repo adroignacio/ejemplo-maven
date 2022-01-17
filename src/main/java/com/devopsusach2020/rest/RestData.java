@@ -46,7 +46,14 @@ public class RestData {
 		int death = 0;
 		int recovered = 0;
 		Gson gson = new Gson();
-        Pais[] estados = gson.fromJson(call.getBody().toLowerCase(), Pais[].class);
+		
+		String body = call.getBody();
+
+		if(body == null || "".equals(body)){
+			return null;
+		}
+
+        Pais[] estados = gson.fromJson(body.toLowerCase(), Pais[].class);
 
         for(Pais estado : estados) {
         	response.setDate(estado.getDate());
